@@ -7,13 +7,49 @@ trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: 'Linux-Docker'
+
+container: conorcasey/docker-jll-azdo:vsphere
+
+workspace:
+  clean: all
+
+variables:
+- group: pTfeRemote
+- name: certdir
+  value: '/usr/local/share/ca-certificates'
+
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: CmdLine@2
+  displayName: Add TFE server TLS certificate to container
+  inputs:
+    script: |
+      sudo mkdir -p $(certdir)/tfe
+      sudo cp SSL/tfe-server-cert.crt $(certdir)/tfe
+      sudo cp SSL/ca-bundle.crt $(certdir)/tfe
+      sudo chmod 755 $(certdir)/tfe
+      sudo chmod 644 $(certdir)/tfe/*
+      sudo update-ca-certificates
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: CmdLine@2
+  displayName: Create .tar.gz of terraform configuration 
+  inputs:
+    script: tar -zcvf upload.tar.gz -C Terraform .; chmod 777 upload.tar.gz
+
+- task: PythonScript@0
+  displayName: Queue terraform job in TFE
+  inputs:
+    type: filePath
+    scriptPath: Scripts/tfe_push.py
+    arguments: $(hostname) "Test-prod" "app04" $(token)
+
+
+#- script: echo Hello, world!
+#  displayName: 'Run a one-line script'
+#
+#- script: |
+#    echo Add other tasks to build, test, and deploy your project.
+#    echo See https://aka.ms/yaml
+#  displayName: 'Run a multi-line script'
+
