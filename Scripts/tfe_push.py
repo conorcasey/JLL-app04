@@ -113,12 +113,12 @@ class TFConfigMgr(object):
         return job_report
 
     def run_status(self, run_id, tf_token):
-    
+        
         headers = {'Authorization': 'Bearer ' + tf_token, 'Content-Type': 'application/vnd.api+json'}
         url = 'https://' + tfe_server + '/api/v2/runs/' + run_id
     
         try:
-            r = requests.get(url, headers=headers, verify=False)
+            r = requests.get(url, headers=headers)
         except Exception as e:
             logging.error('Error running status check : {0} '.format(e))
         return r
@@ -202,15 +202,13 @@ if __name__ == '__main__':
     while job_status != 'applied' or job_status != 'errored' or timeout_counter < 120:
         response = tf_mgr.run_status(run_id, tf_token)
         job_status = response.json()['data']['attributes']['status']
-        run_data = response.json()['data']
         print('Job status : %s' % job_status)
-        print('Run Data : %s' % run_data)
     
         if job_status == 'applied':
             logging.error('Job completed successfully')
             break
         elif job_status == 'errored':
-            logging.error('Build exiting with error')
+            logging.error('Build exiting with error. See TFE run log for more details')
             sys.exit(1)
         else:
           timeout_counter += 1
