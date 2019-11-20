@@ -202,7 +202,7 @@ if __name__ == '__main__':
     while job_status != 'applied' or job_status != 'errored' or timeout_counter < 120:
         response = tf_mgr.run_status(run_id, tf_token)
         job_status = response.json()['data']['attributes']['status']
-        run_events = response.json()['data']['reslationships']['run-events']
+        run_events = response.json()['data']['relationships']['run-events']
         print('Job status : %s' % job_status)
         print('Run Events : %s' % run_events)
     
