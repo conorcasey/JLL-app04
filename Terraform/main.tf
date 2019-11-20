@@ -43,11 +43,11 @@ provider "vsphere" {
 # ---------------------------------------------------------------------------------------------------------------------
 
 provider "panos" {
-    version        = "~> 1.6"
+  version = "~> 1.6"
 
-    hostname = var.panos_hostname
-    username = var.panos_username
-    password = var.panos_password
+  hostname = var.panos_hostname
+  username = var.panos_username
+  password = var.panos_password
 }
 
 module "ahead002-dmz" {
@@ -107,32 +107,32 @@ module "ahead002-int" {
 }
 
 resource "panos_security_rule_group" "example" {
-    position_keyword = "before"
-    position_reference = var.position_ref
-    rule {
-        name = "Allow - 10.30.80.20 to 10.30.68.20"
-        source_zones = ["Inside"]
-        source_addresses = ["10.30.80.20"]
-        source_users = var.source_users
-        hip_profiles = var.hip_profiles
-        destination_zones = ["DMZ"]
-        destination_addresses = ["10.30.68.20"]
-        applications = ["ping", "ms-ds-smb"]
-        services = var.services
-        categories = var.categories
-        action = var.action
-    }
-    rule {
-        name = "Allow - 10.30.68.20 to 10.30.80.20"
-        source_zones = ["DMZ"]
-        source_addresses = ["10.30.68.20"]
-        source_users = var.source_users
-        hip_profiles = var.hip_profiles
-        destination_zones = ["Inside"]
-        destination_addresses = ["10.30.80.20"]
-        applications = ["ping", "ms-rdp"]
-        services = var.services
-        categories = var.categories
-        action = var.action
-    }
+  position_keyword   = "before"
+  position_reference = var.position_ref
+  rule {
+    name                  = "Allow : 10.30.80.20 to 10.30.68.20"
+    source_zones          = ["Inside"]
+    source_addresses      = ["10.30.80.20"]
+    source_users          = var.source_users
+    hip_profiles          = var.hip_profiles
+    destination_zones     = ["DMZ"]
+    destination_addresses = ["10.30.68.20"]
+    applications          = ["ping", "ms-ds-smb"]
+    services              = var.services
+    categories            = var.categories
+    action                = var.action
+  }
+  rule {
+    name                  = "Allow - 10.30.68.20 to 10.30.80.20"
+    source_zones          = ["DMZ"]
+    source_addresses      = ["10.30.68.20"]
+    source_users          = var.source_users
+    hip_profiles          = var.hip_profiles
+    destination_zones     = ["Inside"]
+    destination_addresses = ["10.30.80.20"]
+    applications          = ["ping", "ms-rdp"]
+    services              = var.services
+    categories            = var.categories
+    action                = var.action
+  }
 }

@@ -172,43 +172,43 @@ if __name__ == '__main__':
     latest_run = tf_mgr.find_latest_run(workspace_id, config_version_id)
 
     ## Check configusation version job status
-    #get_response = tf_mgr.show_config_status(config_version_id)
-    #run_status = get_response.json()['data']['attributes']['status']
-    #logger.info('upload job configuration version status : %s' % run_status)
-    #
-    #timeout_counter = 0
-    #run_status = 'blank'
-    #while timeout_counter < 100 or run_status != 'uploaded':
-    #    run_status = get_response.json()['data']['attributes']['status']
-    #    logger.info('upload job configuration version status : %s' % run_status)
-    #
-    #    if run_status == 'uploaded':
-    #        logging.info('Job completed successfully')
-    #        break
-    #    elif run_status == 'errored':
-    #        logging.error('Build exiting with error')
-    #        sys.exit(1)
-    #    else:
-    #      timeout_counter += 1
-    #      time.sleep(10)
+    get_response = tf_mgr.show_config_status(config_version_id)
+    run_status = get_response.json()['data']['attributes']['status']
+    logger.info('upload job configuration version status : %s' % run_status)
+    
+    timeout_counter = 0
+    run_status = 'blank'
+    while timeout_counter < 100 or run_status != 'uploaded':
+        run_status = get_response.json()['data']['attributes']['status']
+        logger.info('upload job configuration version status : %s' % run_status)
+    
+        if run_status == 'uploaded':
+            logging.info('Job completed successfully')
+            break
+        elif run_status == 'errored':
+            logging.error('Build exiting with error')
+            sys.exit(1)
+        else:
+          timeout_counter += 1
+          time.sleep(10)
     
 
 
     #<<-- Check to confirm the job in TFE completes successfully
-    #timeout_counter = 0
-    #job_status = ''
-    #while job_status != 'applied' or job_status != 'errored' or timeout_counter < 120:
-    #    response = tf_mgr.run_status(run_id, tf_token)
-    #    job_status = response.json()['data']['attributes']['status']
-    #    print('Job status : %s' % job_status)
-    #
-    #    if job_status == 'applied':
-    #        logging.error('Job completed successfully')
-    #        break
-    #    elif job_status == 'errored':
-    #        logging.error('Build exiting with error')
-    #        sys.exit(1)
-    #    else:
-    #      timeout_counter += 1
-    #      time.sleep(10)
+    timeout_counter = 0
+    job_status = ''
+    while job_status != 'applied' or job_status != 'errored' or timeout_counter < 120:
+        response = tf_mgr.run_status(run_id, tf_token)
+        job_status = response.json()['data']['attributes']['status']
+        print('Job status : %s' % job_status)
+    
+        if job_status == 'applied':
+            logging.error('Job completed successfully')
+            break
+        elif job_status == 'errored':
+            logging.error('Build exiting with error')
+            sys.exit(1)
+        else:
+          timeout_counter += 1
+          time.sleep(10)
     

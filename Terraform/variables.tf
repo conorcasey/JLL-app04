@@ -55,18 +55,18 @@ variable "win_product_key" {
 }
 
 variable "panos_hostname" {
-    description = "Paloalto host to connect to"
-    type = string
+  description = "Paloalto host to connect to"
+  type        = string
 }
 
 variable "panos_username" {
-    description = "Paloalto service account username"
-    type = string
+  description = "Paloalto service account username"
+  type        = string
 }
 
 variable "panos_password" {
-    description = "Paloalto service account password"
-    type = string
+  description = "Paloalto service account password"
+  type        = string
 }
 
 #variable "name" {
@@ -100,43 +100,43 @@ variable "panos_password" {
 # ---------------------------------------------------------------------------------------------------------------------
 
 variable "position_ref" {
-    description = "Position reference for rule placement"
-    type = string
-    default = "Deny All"
+  description = "Position reference for rule placement"
+  type        = string
+  default     = "Deny All"
 }
 
 variable "source_users" {
-    description = "List of source users"
-    type = list(string)
-    default = ["any"]
+  description = "List of source users"
+  type        = list(string)
+  default     = ["any"]
 }
 
 variable "hip_profiles" {
-    description = "List of HIP profiles"
-    type = list(string)
-    default = ["any"]
+  description = "List of HIP profiles"
+  type        = list(string)
+  default     = ["any"]
 }
 
 variable "destination_addresses" {
-    description = "List of destination addresses"
-    type = list(string)
-    default = ["any"]
+  description = "List of destination addresses"
+  type        = list(string)
+  default     = ["any"]
 }
 
 variable "services" {
-    description = "list of services"
-    type = list(string)
-    default = ["application-default"]
+  description = "list of services"
+  type        = list(string)
+  default     = ["application-default"]
 }
 
 variable "categories" {
-    description = "List of categories"
-    type = list(string)
-    default = ["any"]
+  description = "List of categories"
+  type        = list(string)
+  default     = ["any"]
 }
 
 variable "action" {
-    description = "Action for the matched traffic. This can be allow (default), deny, drop, reset-client, reset-server, or reset-both"
-    type = string
-    default = "allow"
+  description = "Action for the matched traffic. This can be allow (default), deny, drop, reset-client, reset-server, or reset-both"
+  type        = string
+  default     = "allow"
 }
