@@ -51,7 +51,6 @@ provider "panos" {
 }
 
 module "ahead002-dmz" {
-  #source = "git::ssh://git@github.com:443/terraform-JLL/module-vsphere-windows-vm.git?ref=v1.0.3"
   #source = "git::ssh://git@github.com/terraform-JLL/module-vsphere-windows-vm.git?ref=v1.0.4"
   #source = "git::github.com/terraform-JLL/module-vsphere-windows-vm.git?ref=v1.0.4"
   source  = "usazpfdterra01.am.jllnet.com/Test-prod/windows-vm/vsphere"
@@ -79,7 +78,6 @@ module "ahead002-dmz" {
 }
 
 module "ahead002-int" {
-  #source = "git::ssh://git@github.com:443/terraform-JLL/module-vsphere-windows-vm.git?ref=v1.0.3"
   #source = "git::ssh://git@github.com/terraform-JLL/module-vsphere-windows-vm.git?ref=v1.0.4"
   #source = "git::github.com/terraform-JLL/module-vsphere-windows-vm.git?ref=v1.0.4"
   source  = "usazpfdterra01.am.jllnet.com/Test-prod/windows-vm/vsphere"
