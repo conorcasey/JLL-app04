@@ -69,30 +69,30 @@ variable "panos_password" {
     type = string
 }
 
-variable "name" {
-    description = "The security rule name"
-    type = string
-}
+#variable "name" {
+#    description = "The security rule name"
+#    type = string
+#}
 
-variable "source_zones" {
-    description = "List of source zones"
-    type = list(string)
-}
+#variable "source_zones" {
+#    description = "List of source zones"
+#    type = list(string)
+#}
 
-variable "source_addresses" {
-    description = "List of source addresses"
-    type = list(string)
-}
+#variable "source_addresses" {
+#    description = "List of source addresses"
+#    type = list(string)
+#}
 
-variable "destination_zones" {
-    description = "List of destination zones"
-    type = list(string)
-}
+#variable "destination_zones" {
+#    description = "List of destination zones"
+#    type = list(string)
+#}
 
-variable "applications" {
-    description = "List of applications"
-    type = list(string)
-}
+#variable "applications" {
+#    description = "List of applications"
+#    type = list(string)
+#}
 
 # ---------------------------------------------------------------------------------------------------------------------
 # OPTIONAL PARAMETERS
