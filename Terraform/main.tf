@@ -123,7 +123,7 @@ resource "panos_security_rule_group" "example" {
     action                = var.action
   }
   rule {
-    name                  = "Allow : 10.30.68.20 to 10.30.80.20"
+    name                  = "Allow - 10.30.68.20 to 10.30.80.20"
     source_zones          = ["DMZ"]
     source_addresses      = ["10.30.68.20"]
     source_users          = var.source_users
