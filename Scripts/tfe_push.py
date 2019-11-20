@@ -98,6 +98,7 @@ class TFConfigMgr(object):
             for entry in run_request.json()['data']:
                 if entry['relationships']['configuration-version']['data']['id'] == config_version_id:
                     run_result = entry
+                    run_id = run_result['data']['run_id']
                     r_status = run_result['attributes']['status']
                     has_changes = run_result['attributes']['has-changes']
                     job_complete = False
@@ -105,7 +106,7 @@ class TFConfigMgr(object):
                     job_report = {'status':r_status,'changes':has_changes,'job_complete':job_complete}
 
         job_complete = True
-        job_report = {'status':r_status,'changes':has_changes,'job_complete':job_complete}
+        job_report = {'run_id':run_id,'status':r_status,'changes':has_changes,'job_complete':job_complete}
         print("\n")
         logging.info('TFE has completed the job with a status of {0} and a change status of {1}'.format(r_status,run_result['attributes']['has-changes']))
 
@@ -195,6 +196,7 @@ if __name__ == '__main__':
 
 
     #<<-- Check to confirm the job in TFE completes successfully
+    run_id = latest_run.json()['run_id']
     timeout_counter = 0
     job_status = ''
     while job_status != 'applied' or job_status != 'errored' or timeout_counter < 120:
