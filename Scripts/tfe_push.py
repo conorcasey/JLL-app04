@@ -114,7 +114,7 @@ class TFConfigMgr(object):
     def run_status(self, run_id, tf_token):
     
         headers = {'Authorization': 'Bearer ' + tf_token, 'Content-Type': 'application/vnd.api+json'}
-        url = https://' + tfe_server + '/api/v2/runs/' + run_id
+        url = 'https://' + tfe_server + '/api/v2/runs/' + run_id
     
         try:
             r = requests.get(url, headers=headers, verify=False)
