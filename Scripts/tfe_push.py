@@ -98,7 +98,7 @@ class TFConfigMgr(object):
             for entry in run_request.json()['data']:
                 if entry['relationships']['configuration-version']['data']['id'] == config_version_id:
                     run_result = entry
-                    run_id = run_result['data']['run_id']
+                    run_id = run_result['id']
                     r_status = run_result['attributes']['status']
                     has_changes = run_result['attributes']['has-changes']
                     job_complete = False
