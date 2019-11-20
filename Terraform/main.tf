@@ -110,27 +110,27 @@ resource "panos_security_rule_group" "example" {
   position_keyword   = "before"
   position_reference = var.position_ref
   rule {
-    name                  = "Allow : 10.30.80.20 to 10.30.68.20"
+    name                  = "Allow - 10.30.80.20 to 10.30.68.20"
     source_zones          = ["Inside"]
     source_addresses      = ["10.30.80.20"]
     source_users          = var.source_users
     hip_profiles          = var.hip_profiles
     destination_zones     = ["DMZ"]
     destination_addresses = ["10.30.68.20"]
-    applications          = ["ping", "ms-ds-smb"]
+    applications          = ["ping", "ms-rdp", "ms-ds-smb"]
     services              = var.services
     categories            = var.categories
     action                = var.action
   }
   rule {
-    name                  = "Allow - 10.30.68.20 to 10.30.80.20"
+    name                  = "Allow : 10.30.68.20 to 10.30.80.20"
     source_zones          = ["DMZ"]
     source_addresses      = ["10.30.68.20"]
     source_users          = var.source_users
     hip_profiles          = var.hip_profiles
     destination_zones     = ["Inside"]
     destination_addresses = ["10.30.80.20"]
-    applications          = ["ping", "ms-rdp"]
+    applications          = ["ping"]
     services              = var.services
     categories            = var.categories
     action                = var.action

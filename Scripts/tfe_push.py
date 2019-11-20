@@ -111,16 +111,16 @@ class TFConfigMgr(object):
 
         return job_report
 
-    #def run_status(self, run_id, tf_token):
-    #
-    #    headers = {'Authorization': 'Bearer ' + tf_token, 'Content-Type': 'application/vnd.api+json'}
-    #    url = 'https://tfe-0058.lab.aheadaviation.com/api/v2/runs/' + run_id
-    #
-    #    try:
-    #        r = requests.get(url, headers=headers, verify=False)
-    #    except Exception as e:
-    #        logging.error('Error running status check : {0} '.format(e))
-    #    return r
+    def run_status(self, run_id, tf_token):
+    
+        headers = {'Authorization': 'Bearer ' + tf_token, 'Content-Type': 'application/vnd.api+json'}
+        url = https://' + tfe_server + '/api/v2/runs/' + run_id
+    
+        try:
+            r = requests.get(url, headers=headers, verify=False)
+        except Exception as e:
+            logging.error('Error running status check : {0} '.format(e))
+        return r
 
         
 if __name__ == '__main__':
