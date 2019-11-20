@@ -1,3 +1,8 @@
+# ---------------------------------------------------------------------------------------------------------------------
+# REQUIRED PARAMETERS
+# You must provide a value for each of these parameters.
+# ---------------------------------------------------------------------------------------------------------------------
+
 variable "vsphere_user" {
   description = "vSphere user name"
   type        = string
@@ -47,4 +52,51 @@ variable "win_admin_password" {
 variable "win_product_key" {
   description = "Windows OS product license"
   type        = string
+}
+
+# ---------------------------------------------------------------------------------------------------------------------
+# OPTIONAL PARAMETERS
+# These parameters have reasonable defaults.
+# ---------------------------------------------------------------------------------------------------------------------
+
+variable "position_ref" {
+    description = "Position reference for rule placement"
+    type = string
+    default = "Deny All"
+}
+
+variable "source_users" {
+    description = "List of source users"
+    type = list(string)
+    default = ["any"]
+}
+
+variable "hip_profiles" {
+    description = "List of HIP profiles"
+    type = list(string)
+    default = ["any"]
+}
+
+variable "destination_addresses" {
+    description = "List of destination addresses"
+    type = list(string)
+    default = ["any"]
+}
+
+variable "services" {
+    description = "list of services"
+    type = list(string)
+    default = ["application-default"]
+}
+
+variable "categories" {
+    description = "List of categories"
+    type = list(string)
+    default = ["any"]
+}
+
+variable "action" {
+    description = "Action for the matched traffic. This can be allow (default), deny, drop, reset-client, reset-server, or reset-both"
+    type = string
+    default = "allow"
 }

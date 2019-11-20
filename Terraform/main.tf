@@ -36,6 +36,19 @@ provider "vsphere" {
 #  ip       = var.ad_ip
 #}
 
+# ---------------------------------------------------------------------------------------------------------------------
+# INCLUDE THE PALO ALTO NETWORKS PANOR PROVIDER
+# The panos provider will be leveraged to create firewall rules for newly provisioned vms
+# https://www.terraform.io/docs/providers/panos/index.html
+# ---------------------------------------------------------------------------------------------------------------------
+
+provider "panos" {
+    version        = "~> 1.6"
+
+    hostname = var.panos_hostname
+    username = var.panos_username
+    password = var.panos_password
+}
 
 module "ahead002-dmz" {
   #source = "git::ssh://git@github.com:443/terraform-JLL/module-vsphere-windows-vm.git?ref=v1.0.3"
@@ -91,4 +104,35 @@ module "ahead002-int" {
   win_domain_admin_password = var.ad_password
   win_product_key           = var.win_product_key
   time_zone                 = "020"
+}
+
+resource "panos_security_rule_group" "example" {
+    position_keyword = "before"
+    position_reference = var.position_ref
+    rule {
+        name = "Allow : 10.30.80.20 to 10.30.68.20"
+        source_zones = ["Inside"]
+        source_addresses = ["10.30.80.20"]
+        source_users = var.source_users
+        hip_profiles = var.hip_profiles
+        destination_zones = ["DMZ"]
+        destination_addresses = ["10.30.68.20"]
+        applications = ["ping", "ms-ds-smb"]
+        services = var.services
+        categories = var.categories
+        action = var.action
+    }
+    rule {
+        name = "Allow : 10.30.68.20 to 10.30.80.20"
+        source_zones = ["DMZ"]
+        source_addresses = ["10.30.68.20"]
+        source_users = var.source_users
+        hip_profiles = var.hip_profiles
+        destination_zones = ["Inside"]
+        destination_addresses = ["10.30.80.20"]
+        applications = ["ping", "ms-rdp"]
+        services = var.services
+        categories = var.categories
+        action = var.action
+    }
 }
