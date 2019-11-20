@@ -102,6 +102,7 @@ class TFConfigMgr(object):
                     r_status = run_result['attributes']['status']
                     has_changes = run_result['attributes']['has-changes']
                     job_complete = False
+                    logging.info('Run Id : {0}'.format(run_id))
                     logging.info('Current TFE job status: {0}'.format(r_status))
                     job_report = {'status':r_status,'changes':has_changes,'job_complete':job_complete}
 
@@ -196,7 +197,7 @@ if __name__ == '__main__':
 
 
     #<<-- Check to confirm the job in TFE completes successfully
-    run_id = latest_run.json()['run_id']
+    run_id = latest_run['run_id']
     timeout_counter = 0
     job_status = ''
     while job_status != 'applied' or job_status != 'errored' or timeout_counter < 120:
