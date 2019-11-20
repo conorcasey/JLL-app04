@@ -208,7 +208,7 @@ if __name__ == '__main__':
             logging.error('Job completed successfully')
             break
         elif job_status == 'errored':
-            logging.error('Build exiting with error. See TFE run log for more details')
+            logging.error('Build exiting with error. See TFE run id ' + run_id ' for more details')
             sys.exit(1)
         else:
           timeout_counter += 1
