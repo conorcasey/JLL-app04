@@ -16,6 +16,7 @@ workspace:
 
 variables:
 - group: pTfeRemote
+- group: labPaloAlto
 - name: certdir
   value: '/usr/local/share/ca-certificates'
 
@@ -44,12 +45,10 @@ steps:
     scriptPath: Scripts/tfe_push.py
     arguments: $(hostname) "Test-prod" "app04" $(token)
 
-
-#- script: echo Hello, world!
-#  displayName: 'Run a one-line script'
-#
-#- script: |
-#    echo Add other tasks to build, test, and deploy your project.
-#    echo See https://aka.ms/yaml
-#  displayName: 'Run a multi-line script'
+- task: PythonScript@0
+  displayName: Commit Firewall Updates if necessary
+  inputs:
+    type: filePath
+    scriptPath: Scripts/panos_commit.py
+    arguments: $(panos_firewall) $(panos_username) $(panos_password)
 

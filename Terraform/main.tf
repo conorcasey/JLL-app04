@@ -115,7 +115,7 @@ resource "panos_security_rule_group" "example" {
     hip_profiles          = var.hip_profiles
     destination_zones     = ["DMZ"]
     destination_addresses = ["10.30.68.20"]
-    applications          = ["ping", "ms-rdp", "ms-ds-smb"]
+    applications          = ["ping", "ms-rdp"]
     services              = var.services
     categories            = var.categories
     action                = var.action
