@@ -68,7 +68,8 @@ module "ahead002-dmz" {
   vsphere_ipv4_gateway      = "10.30.68.1"
   vsphere_dns_server_list   = ["10.20.1.204", "10.20.1.205"]
   vsphere_disk_label        = "disk"
-  vsphere_additional_disks  = [{ unit_number = 2, size = 50, thin_provisioned = true }]
+  #vsphere_additional_disks  = [{ unit_number = 2, size = 50, thin_provisioned = true }]
+  vsphere_additional_disks  = []
   win_admin_password        = var.win_admin_password
   win_join_domain           = var.ad_domain
   win_domain_admin_user     = var.ad_user
