@@ -53,8 +53,8 @@ provider "panos" {
 module "ahead002-dmz" {
   #source = "git::ssh://git@github.com/terraform-JLL/module-vsphere-windows-vm.git?ref=v1.0.4"
   #source = "git::github.com/terraform-JLL/module-vsphere-windows-vm.git?ref=v1.0.4"
-  source  = "usazpfdterra01.am.jllnet.com/Test-prod/windows-vm/vsphere"
-  version = "1.0.5"
+  source  = "usazpfdterra01.am.jllnet.com/Test-prod/vm/vsphere"
+  version = "1.0.2"
 
   #ad_ou                     = "OU=Virtual Servers,OU=Servers,DC=AM,DC=JLLNET,DC=com"
   vsphere_datacenter        = "Lisle_Lab"
@@ -68,12 +68,12 @@ module "ahead002-dmz" {
   vsphere_ipv4_gateway      = "10.30.68.1"
   vsphere_dns_server_list   = ["10.20.1.204", "10.20.1.205"]
   vsphere_disk_label        = "disk"
-  #vsphere_additional_disks  = [{ unit_number = 2, size = 50, thin_provisioned = true }]
-  vsphere_additional_disks  = []
+  vsphere_additional_disks  = [{ unit_number = 2, size = 50, thin_provisioned = true }]
+#  vsphere_additional_disks  = []
   win_admin_password        = var.win_admin_password
-  win_join_domain           = var.ad_domain
-  win_domain_admin_user     = var.ad_user
-  win_domain_admin_password = var.ad_password
+#  win_join_domain           = var.ad_domain
+#  win_domain_admin_user     = var.ad_user
+#  win_domain_admin_password = var.ad_password
   win_product_key           = var.win_product_key
   time_zone                 = "020"
 }
